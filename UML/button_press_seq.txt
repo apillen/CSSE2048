@@ -1,0 +1,18 @@
+@startuml
+
+title "Button Press - Sequence Diagram"
+
+
+MainActivity -> BoardController : btnUp()
+BoardController -> BoardModel : shiftUp()
+BoardController -> BoardView : setNextGrid()
+BoardController -> BoardView : startAnimating()
+BoardController -> BoardModel : gameOver()
+alt game is over
+    BoardModel --> BoardController: true
+    BoardController -> BoardView : setGameOver()
+else game not over
+    BoardModel -->BoardController: false
+end
+BoardController -> MainActivity: showScore()
+@enduml

@@ -1,0 +1,103 @@
+@startuml
+
+title CSSE 2048 - Class Diagram
+
+
+MainActivity "1" o-- "1" BoardController: creates >
+BoardController "1" o-- "1" BoardView: displays >
+BoardController "1" o-- "1" BoardModel: updates >
+Fragment <|-- BoardController
+
+class MainActivity {
+    +void showScore()
+    +void aboutBtn()
+    +void buttonPressed()
+    
+    -void onCreate()
+    -void onStop()
+    -void onStart()
+}
+
+
+
+class BoardView {
+    -Bitmap bitmap
+    -Canvas canvas
+    -Paint paint
+    -Paint paintNumber
+    -boolean created
+    -LoopThread gameThread
+    -SurfaceHolder holder
+    -boolean animating
+    -int frame
+    -int[][] grid
+    -int[][] nextGrid
+    -int[][] animationCodes
+    -float[][] offset
+    -boolean gameover
+    -int direction
+    
+    +void viewCreated()
+    +void setGameOver()
+    +boolean isAnimating()
+    +void setGrid()
+    +void setNextGrid()
+    +void startAnimating()
+    
+    
+    -void setColor()
+    -void drawBoard()
+    -void drawBoardOffsetX()
+    -void drawBoardOffsetY()
+    -void drawGameOver()
+    -void updateAnimationCodes()
+    -void updateOffset()
+    -void animate()
+    -void drawCanvas()
+    
+}
+
+class BoardController {
+    -BoardView boardView
+    -BoardModel boardModel
+    -EventInterface eventInterface
+    
+    +View onCreateView()
+    +void saveState()
+    +void resumeState()
+    +int getBoardScore()
+    +int getBoardHiScore()
+    +void setEventInterface()
+    +void btnUp()
+    +void btnDown()
+    +void btnLeft()
+    +void btnRight()
+    +void reset()
+
+}
+
+class BoardModel {
+    -int[][] matrix
+    -int score
+    -int highScore
+    
+    +int[][] getMatrix()
+    +void setMatrix()
+    +int getScore()
+    +int getHighScore()
+    +boolean gameOver()
+    +void shiftUp()
+    +void shiftDown()
+    +void shiftLeft()
+    +void shiftRight()
+    
+    -int[] collapse()
+    -int[] reverse()
+    -boolean full()
+    -void setRow()
+    -int[] getRow()
+    -void addRandomBlock()
+
+}
+
+@enduml

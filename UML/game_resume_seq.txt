@@ -1,0 +1,12 @@
+@startuml
+
+title "Game Resume - Sequence Diagram"
+
+
+MainActivity -> BoardController : resumeState()
+BoardController --> MainActivity : score
+MainActivity -> MainActivity: displayScore()
+BoardController -> BoardModel: setMatrix()
+BoardController -> BoardView: setGrid()
+
+@enduml
